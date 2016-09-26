@@ -13,17 +13,39 @@ use Lenius\Economic\RestClient;
 class EconomicClient extends \Object
 {
 	/**
-	 * @var
+	 * @config
 	 */
-	protected $secretToken;
+	protected static $secretToken;
 
 	/**
-	 * @var
+	 * @config
 	 */
-	protected $agreementGrantToken;
+	protected static $agreementGrantToken;
 
 	/**
-	 * @var RestClient
+	 * @var string
+	 */
+	private static $currency;
+
+	/**
+	 * TODO this should be able to be chosen for each invoice
+	 * @var int
+	 */
+	private static $invoice_layout_number;
+
+	/**
+	 * paymentTermsNumber is required by e-conomic, the other keys are not.
+	 * @var array
+	 */
+	private static $payment_terms = [
+		'paymentTermsNumber' => null,
+		'daysOfCredit' => null,
+		'name' => null,
+		'paymentTermsType' => null
+	];
+
+	/**
+	 * @object RestClient
 	 */
 	protected $client;
 
@@ -50,6 +72,27 @@ class EconomicClient extends \Object
 	protected function getAgreementGrantToken()
 	{
 		return $this->config()->agreementGrantToken;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCurrency()
+	{
+		return $this->config()->currency;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getInvoiceLayoutNumber()
+	{
+		return $this->config()->invoice_layout_number;
+	}
+	
+	public function getPaymentTerms()
+	{
+		return $this->config()->payment_terms;
 	}
 
 	/**
