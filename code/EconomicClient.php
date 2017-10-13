@@ -39,9 +39,9 @@ class EconomicClient extends \Object
 	 */
 	private static $payment_terms = [
 		'paymentTermsNumber' => null,
-		'daysOfCredit' => null,
-		'name' => null,
-		'paymentTermsType' => null
+		'daysOfCredit'       => null,
+		'name'               => null,
+		'paymentTermsType'   => null
 	];
 
 	/**
@@ -89,7 +89,7 @@ class EconomicClient extends \Object
 	{
 		return $this->config()->invoice_layout_number;
 	}
-	
+
 	public function getPaymentTerms()
 	{
 		return $this->config()->payment_terms;
@@ -123,6 +123,27 @@ class EconomicClient extends \Object
 		return $this->getResponse();
 	}
 
+	public function post($string, $params = null)
+	{
+		$this->response = $this->request()->post($string, $params);
+
+		return $this->getResponse();
+	}
+
+	public function put($string, $params = null)
+	{
+		$this->response = $this->request()->put($string, $params);
+
+		return $this->getResponse();
+	}
+
+	public function delete($string)
+	{
+		$this->response = $this->request()->delete($string);
+
+		return $this->getResponse();
+	}
+
 	/**
 	 * Shortcut for getting all customers
 	 * @return Response
@@ -132,4 +153,39 @@ class EconomicClient extends \Object
 		return $this->get('customers', $params);
 	}
 
+	/**
+	 * Create customer in e-conomic
+	 * @return Response
+	 */
+	public function createCustomer($params)
+	{
+		return $this->post('customers', $params);
+	}
+
+	/**
+	 * Update customer in e-conomic
+	 * @return Response
+	 */
+	public function updateCustomer($customerID, $params)
+	{
+		return $this->put('customers/' . $customerID, $params);
+	}
+
+	/**
+	 * Delete customer in e-conomic
+	 * @return Response
+	 */
+	public function deleteCustomer($customerID)
+	{
+		return $this->delete('customers/' . $customerID);
+	}
+
+	/**
+	 * Create draft invoice
+	 * @return Response
+	 */
+	public function createInvoiceDraft($params)
+	{
+		return $this->post('invoices/drafts', $params);
+	}
 }
