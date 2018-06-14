@@ -197,4 +197,53 @@ class EconomicClient extends \Object
 	{
 		return $this->post('invoices/booked', $params);
 	}
+
+    /**
+     * Get a booker invoice in e-conomic
+     * @return Response
+     */
+    public function getBookedInvoice($invoiceID){
+        return $this->get('invoices/booked/'.$invoiceID);
+    }
+
+    /**
+     * Get all created product groups in eConomic
+     * @return Response
+     */
+	public function getProductGroups(){
+	    return  $this->get('product-groups');
+    }
+
+    /**
+     * Create order in e-conomic
+     * @return Response
+     */
+    public function createOrder($params){
+        return  $this->post('orders/drafts',$params);
+    }
+
+    /**
+     * Mark drafted order as sent
+     * @return Response
+     */
+    public function sentOrder($orderNumber){
+        return $this->post('invoices/sent/'.$orderNumber);
+    }
+
+    /**
+     * Delete drafted order
+     * @return Response
+     */
+    public function deleteOrderDraft($orderNumber){
+        return $this->delete('/orders/drafts/'.$orderNumber);
+    }
+
+    /**
+     * Book sent order
+     * @return Response
+     */
+    public function bookSentOrder($orderNumber){
+        //TODO
+        return $this->post('/orders/drafts/'.$orderNumber);
+    }
 }
