@@ -282,8 +282,9 @@ class EconomicClient extends \Object
      * Mark drafted order as sent
      * @return Response
      */
-    public function sendOrderDraft($params){
-        return $this->POST('orders/sent',$params);
+    public function sendOrderDraft($orderNumber){
+        $orderDocument = $this->get('orders/drafts/'.$orderNumber)->asArray();
+        return $this->POST('orders/sent',$orderDocument)->asArray();
     }
 
     /**
@@ -292,6 +293,14 @@ class EconomicClient extends \Object
      */
     public function deleteOrderDraft($orderNumber){
         return $this->delete('orders/drafts/'.$orderNumber);
+    }
+
+    /**
+     * Delete sent order
+     * @return Response
+     */
+    public function deleteSentOrderDraft($orderNumber){
+        return $this->delete('orders/sent/'.$orderNumber);
     }
 
     /**
