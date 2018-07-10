@@ -188,4 +188,13 @@ class EconomicClient extends \Object
 	{
 		return $this->post('invoices/drafts', $params);
 	}
+
+	/**
+	 * Book draft invoice
+	 * @return Response
+	 */
+	public function bookInvoiceDraft($params)
+	{
+		return $this->post('invoices/booked', $params);
+	}
 }
