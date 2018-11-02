@@ -226,8 +226,8 @@ class EconomicClient extends \Object
      * Get all created product groups in eConomic
      * @return Response
      */
-	public function getProductGroups(){
-	    return  $this->get('product-groups');
+	public function getProductGroups($params = null){
+	    return  $this->get('product-groups',$params);
     }
 
     /**
