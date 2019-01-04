@@ -284,7 +284,7 @@ class EconomicClient extends \Object
      */
     public function sendOrderDraft($orderNumber){
         $orderDocument = $this->get('orders/drafts/'.$orderNumber)->asArray();
-        return $this->POST('orders/sent',$orderDocument)->asArray();
+        return $this->post('orders/sent/'.$orderNumber,$orderDocument)->asArray();
     }
 
     /**
